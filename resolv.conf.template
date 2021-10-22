@@ -1,0 +1,2 @@
+search cblab.local
+nameserver {{ ip_address }}

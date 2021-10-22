@@ -1,0 +1,12 @@
+$ORIGIN .
+$TTL 86400	; 1 day
+cblab.local		IN SOA	labadm01.cblab.local. root.cblab.local. (
+				2021092309 ; serial
+				3600       ; refresh (1 hour)
+				1800       ; retry (30 minutes)
+				604800     ; expire (1 week)
+				86400      ; minimum (1 day)
+				)
+			NS	labadm01.cblab.local.
+$ORIGIN cblab.local.
+labadm01		A	{{ ip_address }}
