@@ -79,6 +79,7 @@ COPY --chown=admin:admin named.conf.template /home/admin/dns
 COPY --chown=admin:admin resolv.conf.template /home/admin/dns
 COPY --chown=admin:admin run_named.sh /home/admin/dns
 COPY --chown=admin:admin createZone.py /home/admin/dns
+COPY --chown=admin:admin install.sh /home/admin
 RUN chmod 755 /home/admin/dns/run_named.sh
 RUN chmod 755 /home/admin/dns/createZone.py
 
@@ -88,6 +89,8 @@ RUN git clone https://github.com/mminichino/couchbase-init
 RUN git clone https://github.com/mminichino/terraform-aws-couchbase-poc
 RUN git clone https://github.com/mminichino/db-host-prep
 RUN git clone https://github.com/mminichino/ansible-helper
+RUN git clone https://github.com/mminichino/terraform-vmware-couchbase-poc
+RUN git clone https://github.com/mminichino/openshift-helper
 COPY --chown=admin:admin bashrc /home/admin/.bashrc
 
 CMD exec sudo /home/admin/dns/run_named.sh

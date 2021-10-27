@@ -14,6 +14,7 @@ from jinja2 import Template, FileSystemLoader, Environment
 import netifaces
 import subprocess
 from pwd import getpwnam
+import getpass
 
 class zoneConfig(object):
 
@@ -58,6 +59,9 @@ class zoneConfig(object):
             except Exception as e:
                 print("Could not get uid and gid for user: %s" % str(e))
                 sys.exit(1)
+        else:
+            userUid = getpwnam(getpass.getuser()).pw_uid
+            userGid = getpwnam(getpass.getuser()).pw_gid
 
         try:
             if not os.path.exists(self.dnsKeyFileDir):
@@ -223,7 +227,7 @@ class zoneConfig(object):
             sys.exit(1)
 
         try:
-            os.chown(self.dnsKeyFile, userUid, userGid)
+            os.chown(self.dnsKeyFile, int(userUid), int(userGid))
         except Exception as e:
             print("Could not change ownership on dns key file: %s" % str(e))
             sys.exit(1)

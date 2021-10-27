@@ -16,6 +16,7 @@ export PATH
 
 export PATH=$PATH:/home/admin/ansible-helper
 export HELPER_PATH=/home/admin/db-host-prep/playbooks:/home/admin/couchbase-init/playbooks
+export PS1="[\u@perfctl:\w]\$ "
 
 # Check for interactive shell
 if [ -z "$PS1" ]; then
