@@ -38,11 +38,13 @@ RUN dnf install -y xmlstarlet \
 RUN alternatives --set python /usr/bin/python3
 
 RUN pip3 install --upgrade pip setuptools wheel
-RUN pip3 install boto boto3 botocore requests dnspython netaddr docutils couchbase netifaces
+RUN pip3 install boto boto3 botocore requests dnspython netaddr docutils couchbase netifaces pyvmomi
 
 RUN ansible-galaxy collection install community.aws
 RUN ansible-galaxy collection install community.general
 RUN ansible-galaxy collection install ansible.netcommon
+RUN ansible-galaxy collection install community.vmware
+RUN ansible-galaxy collection install ansible.posix
 
 WORKDIR /var/tmp
 RUN curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip
@@ -83,6 +85,12 @@ COPY --chown=admin:admin install.sh /home/admin
 RUN chmod 755 /home/admin/dns/run_named.sh
 RUN chmod 755 /home/admin/dns/createZone.py
 
+RUN ansible-galaxy collection install community.aws
+RUN ansible-galaxy collection install community.general
+RUN ansible-galaxy collection install ansible.netcommon
+RUN ansible-galaxy collection install community.vmware
+RUN ansible-galaxy collection install ansible.posix
+
 RUN git clone https://github.com/mminichino/perf-lab-bin /home/admin/bin
 RUN git clone https://github.com/mminichino/terraform-aws-generator-node
 RUN git clone https://github.com/mminichino/couchbase-init
@@ -91,6 +99,7 @@ RUN git clone https://github.com/mminichino/db-host-prep
 RUN git clone https://github.com/mminichino/ansible-helper
 RUN git clone https://github.com/mminichino/terraform-vmware-couchbase-poc
 RUN git clone https://github.com/mminichino/openshift-helper
+RUN git clone https://github.com/mminichino/general-admin
 COPY --chown=admin:admin bashrc /home/admin/.bashrc
 
 CMD exec sudo /home/admin/dns/run_named.sh

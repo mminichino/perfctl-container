@@ -15,7 +15,7 @@ export PATH
 # User specific aliases and functions
 
 export PATH=$PATH:/home/admin/ansible-helper
-export HELPER_PATH=/home/admin/db-host-prep/playbooks:/home/admin/couchbase-init/playbooks
+export HELPER_PATH=/home/admin/db-host-prep/playbooks:/home/admin/couchbase-init/playbooks:/home/admin/general-admin/playbooks
 export PS1="[\u@perfctl:\w]\$ "
 
 # Check for interactive shell
