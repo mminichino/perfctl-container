@@ -25,4 +25,8 @@ fi
 
 eval "$(ssh-agent -s)"
 
-ssh-add .ssh/adminkey
+for file in $(find .ssh/* -not -name authorized_keys -not -name *.pub -not -name known_hosts)
+do
+ssh-keygen -l -f $file >/dev/null 2>&1
+[ $? -eq 0 ] && ssh-add $file
+done

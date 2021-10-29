@@ -20,6 +20,11 @@ while true; do
             ;;
     --shell )
             shift
+	    for file in $(find $HOME/.ssh/*)
+	    do
+	      docker cp $file perfctl:/home/admin/.ssh
+	    done
+            docker exec perfctl sudo chown -R admin:admin /home/admin/.ssh
             docker exec -it perfctl bash
             exit
             ;;
