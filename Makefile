@@ -14,5 +14,8 @@ push:
 	docker image tag perfctl:latest mminichino/perfctl:$(MAJOR_REV).0.$(MINOR_REV)
 	docker push mminichino/perfctl:latest
 	docker push mminichino/perfctl:$(MAJOR_REV).0.$(MINOR_REV)
+	git add -A .
+	git commit -m "Build version $(MAJOR_REV).0.$(MINOR_REV)"
+	git push -u origin main
 build:
 	docker build --force-rm=true --no-cache=true -t perfctl -f Dockerfile .
